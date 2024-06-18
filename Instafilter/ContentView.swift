@@ -9,25 +9,46 @@ import StoreKit
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.requestReview) var requestReview
 
+    @State private var processedImage: Image?
+    @State private var filterIntensity = 0.5
     
     var body: some View {
-//        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!)
-        
-//        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!, subject: Text("Learn Swift here"), message: Text("Check out the 100 Days of SwiftUI!"))
-        
-//        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!) {
-//            Label("Spread the word about Swift", systemImage: "swift")
-//        }
-        
-//        ShareLink(item: example, preview: SharePreview("Singapore Airport", image: example)) {
-//            Label("Click to share", systemImage: "airplane")
-//        }
-        
-        Button("Leave a review") {
-            requestReview()
+        NavigationStack {
+            VStack {
+                Spacer()
+                
+                if let processedImage {
+                    processedImage
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    ContentUnavailableView("No picture", systemImage: "photo.badge.plus", description: Text("Tap to import a photo"))
+                }
+                
+                Spacer()
+                
+                HStack {
+                    Text("Intensity")
+                    Slider(value: $filterIntensity)
+                }
+                
+                HStack {
+                    Button("Change Filter", action: changeFilter)
+                    
+                    Spacer()
+                    
+                    // share the picture
+                    
+                }
+            }
+            .padding([.horizontal, .bottom])
+            .navigationTitle("Instafilter")
         }
+    }
+    
+    func changeFilter() {
+        
     }
 }
 
