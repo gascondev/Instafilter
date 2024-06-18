@@ -9,21 +9,20 @@ import PhotosUI
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var pickerItem: PhotosPickerItem?
-    @State private var selectedImage: Image?
+ 
+    let example = Image(.example)
     
     var body: some View {
-        VStack {
-            PhotosPicker("Select a picture", selection: $pickerItem, matching: .images)
-            selectedImage?
-                .resizable()
-                .scaledToFit()
-        }
-        .onChange(of: pickerItem) {
-            Task {
-                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
-            }
+//        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!)
+        
+//        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!, subject: Text("Learn Swift here"), message: Text("Check out the 100 Days of SwiftUI!"))
+        
+//        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!) {
+//            Label("Spread the word about Swift", systemImage: "swift")
+//        }
+        
+        ShareLink(item: example, preview: SharePreview("Singapore Airport", image: example)) {
+            Label("Click to share", systemImage: "airplane")
         }
     }
 }
