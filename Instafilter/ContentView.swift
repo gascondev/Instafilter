@@ -5,12 +5,12 @@
 //  Created by Álvaro Gascón on 16/6/24.
 //
 
-import PhotosUI
+import StoreKit
 import SwiftUI
 
 struct ContentView: View {
- 
-    let example = Image(.example)
+    @Environment(\.requestReview) var requestReview
+
     
     var body: some View {
 //        ShareLink(item: URL(string: "https://www.hackingwithswift.com")!)
@@ -21,8 +21,12 @@ struct ContentView: View {
 //            Label("Spread the word about Swift", systemImage: "swift")
 //        }
         
-        ShareLink(item: example, preview: SharePreview("Singapore Airport", image: example)) {
-            Label("Click to share", systemImage: "airplane")
+//        ShareLink(item: example, preview: SharePreview("Singapore Airport", image: example)) {
+//            Label("Click to share", systemImage: "airplane")
+//        }
+        
+        Button("Leave a review") {
+            requestReview()
         }
     }
 }
