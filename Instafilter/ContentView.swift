@@ -48,31 +48,33 @@ struct ContentView: View {
                 Spacer()
             
                 VStack {
-                    if currentFilter.inputKeys.contains(kCIInputIntensityKey) {
-                        HStack {
-                            Text("Intensity")
-                            Slider(value: $filterIntensity)
-                                .onChange(of: filterIntensity, applyProcessing)
+                    if processedImage != nil {
+                        if currentFilter.inputKeys.contains(kCIInputIntensityKey) {
+                            HStack {
+                                Text("Intensity")
+                                Slider(value: $filterIntensity)
+                                    .onChange(of: filterIntensity, applyProcessing)
+                            }
+                            .disabled(processedImage == nil)
                         }
-                        .disabled(processedImage == nil)
-                    }
-                    
-                    if currentFilter.inputKeys.contains(kCIInputRadiusKey) {
-                        HStack {
-                            Text("Radius")
-                            Slider(value: $filterRadius, in: 0...200)
-                                .onChange(of: filterRadius, applyProcessing)
+                        
+                        if currentFilter.inputKeys.contains(kCIInputRadiusKey) {
+                            HStack {
+                                Text("Radius")
+                                Slider(value: $filterRadius, in: 0...200)
+                                    .onChange(of: filterRadius, applyProcessing)
+                            }
+                            .disabled(processedImage == nil)
                         }
-                        .disabled(processedImage == nil)
-                    }
-                    
-                    if currentFilter.inputKeys.contains(kCIInputScaleKey) {
-                        HStack {
-                            Text("Scale")
-                            Slider(value: $filterScale, in: 0...10)
-                                .onChange(of: filterScale, applyProcessing)
+                        
+                        if currentFilter.inputKeys.contains(kCIInputScaleKey) {
+                            HStack {
+                                Text("Scale")
+                                Slider(value: $filterScale, in: 0...10)
+                                    .onChange(of: filterScale, applyProcessing)
+                            }
+                            .disabled(processedImage == nil)
                         }
-                        .disabled(processedImage == nil)
                     }
                 }
                 .padding(.vertical)
